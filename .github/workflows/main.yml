@@ -1789,7 +1789,7 @@ jobs:
              l.add(back);
             }
             for (final BubbleActs.Act k : kids) {
-             if (reopenParent == null && owner == 0 && BubbleActs.pinCol(sp, k) > 0) continue;
+             if (BubbleActs.pinCol(sp, k) > 0) continue;
              LItem it = new LItem();
              if (BubbleActs.isFolder(k)) {
               it.icon = folderIcon();
@@ -1895,25 +1895,51 @@ jobs:
 
             // opens each pinned folder of the given list in its column, in column order
             private void openPins(String scope) {
-             List<BubbleActs.Act> tops = new ArrayList<>();
+             List<BubbleActs.Act> level = new ArrayList<>();
              if ("bub_acts".equals(scope)) {
-              for (BubbleActs.Act a : BubbleActs.load(sp)) if (BubbleActs.isFolder(a)) tops.add(a);
+              for (BubbleActs.Act a : BubbleActs.load(sp)) if (a != null) level.add(a);
              } else {
-              for (BubbleActs.Act k : BubbleActs.kids(BubbleActs.swipeRoot(sp, scope))) if (BubbleActs.isFolder(k)) tops.add(k);
+              level = BubbleActs.kids(BubbleActs.swipeRoot(sp, scope));
              }
-             List<BubbleActs.Act> pinned = new ArrayList<>();
-             for (BubbleActs.Act f : tops) if (BubbleActs.pinCol(sp, f) > 0) pinned.add(f);
-             java.util.Collections.sort(pinned, (x, y) -> Integer.compare(BubbleActs.pinCol(sp, x), BubbleActs.pinCol(sp, y)));
-             for (BubbleActs.Act f : pinned) {
-              if (listRoot == null || listParams == null) return;
-              int[] tl = new int[2];
-              listRoot.getLocationOnScreen(tl);
-              lastTouchRawY = tl[1];
-              lastRowLeft = tl[0];
-              lastRowRight = tl[0] + listRoot.getWidth();
-              lastRowBottom = tl[1] + listRoot.getHeight();
-              openSideBox(kidItems(BubbleActs.kids(f), null, sideBoxes.size() + 1), fkey(f));
+             List<Object[]> pins = new ArrayList<>();
+             gatherPins(level, new ArrayList<BubbleActs.Act>(), pins);
+             java.util.Collections.sort(pins, (x, y) -> Integer.compare(BubbleActs.pinCol(sp, (BubbleActs.Act) x[0]), BubbleActs.pinCol(sp, (BubbleActs.Act) y[0])));
+             List<BubbleActs.Act> seq = new ArrayList<>();
+             java.util.Set<String> done = new java.util.HashSet<>();
+             for (Object[] pin : pins) {
+              @SuppressWarnings("unchecked")
+              List<BubbleActs.Act> chain = (List<BubbleActs.Act>) pin[1];
+              for (BubbleActs.Act anc : chain) if (done.add(anc.fid)) seq.add(anc);
+              BubbleActs.Act f = (BubbleActs.Act) pin[0];
+              if (done.add(f.fid)) seq.add(f);
              }
+             // each column opens after the one before it, so they come out in order
+             final int step = sp.getInt("bub_fxms", 300) + 60;
+             for (int idx = 0; idx < seq.size(); idx++) {
+              final BubbleActs.Act f = seq.get(idx);
+              handler.postDelayed(() -> openOnePin(f), (long) idx * step);
+             }
+            }
+
+            private void gatherPins(List<BubbleActs.Act> level, List<BubbleActs.Act> chain, List<Object[]> out) {
+             for (BubbleActs.Act k : level) {
+              if (!BubbleActs.isFolder(k)) continue;
+              if (BubbleActs.pinCol(sp, k) > 0) out.add(new Object[]{k, new ArrayList<BubbleActs.Act>(chain)});
+              List<BubbleActs.Act> sub = new ArrayList<>(chain);
+              sub.add(k);
+              gatherPins(BubbleActs.kids(k), sub, out);
+             }
+            }
+
+            private void openOnePin(BubbleActs.Act f) {
+             if (listRoot == null || listParams == null) return;
+             int[] tl = new int[2];
+             listRoot.getLocationOnScreen(tl);
+             lastTouchRawY = tl[1];
+             lastRowLeft = tl[0];
+             lastRowRight = tl[0] + listRoot.getWidth();
+             lastRowBottom = tl[1] + listRoot.getHeight();
+             openSideBox(kidItems(BubbleActs.kids(f), null, sideBoxes.size() + 1), fkey(f));
             }
 
             private void openSideBox(List<LItem> l, String key) {
@@ -4359,6 +4385,18 @@ jobs:
             final View old = container.getChildCount() > 0 ? container.getChildAt(0) : null;
             int W = container.getWidth() > 0 ? container.getWidth()
               : getResources().getDisplayMetrics().widthPixels;
+            if (old != null && dir == 0) {
+             container.addView(nv, new FrameLayout.LayoutParams(-1, -1));
+             nv.getViewTreeObserver().addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
+              @Override
+              public boolean onPreDraw() {
+               if (nv.getViewTreeObserver().isAlive()) nv.getViewTreeObserver().removeOnPreDrawListener(this);
+               container.removeView(old);
+               return true;
+              }
+             });
+             return;
+            }
             if (old == null || dir == 0) {
              container.removeAllViews();
              container.addView(nv, new FrameLayout.LayoutParams(-1, -1));
@@ -7861,25 +7899,16 @@ jobs:
            final List<String> labels = new ArrayList<>();
            final List<String> fids = new ArrayList<>();
            BubbleActs.Act[] acts = BubbleActs.load(sp);
-           boolean changed = false;
-           for (BubbleActs.Act a : acts) {
-            if (a == null || !BubbleActs.isFolder(a)) continue;
-            if (a.fid == null || a.fid.isEmpty()) { a.fid = BubbleActs.newFid(); changed = true; }
-            labels.add(t("عملکردها", "Actions") + " › " + BubbleActs.title(this, a));
-            fids.add(a.fid);
-           }
-           if (changed) BubbleActs.save(sp, acts);
+           List<BubbleActs.Act> top = new ArrayList<>();
+           for (BubbleActs.Act a : acts) if (a != null) top.add(a);
+           if (collectFolders(top, t("عملکردها", "Actions") + " › ", labels, fids)) BubbleActs.save(sp, acts);
            for (String d : new String[]{"left", "down", "right"}) {
             BubbleActs.Act root = BubbleActs.swipeRoot(sp, d);
             List<BubbleActs.Act> ks = BubbleActs.kids(root);
-            boolean c2 = false;
-            for (BubbleActs.Act k : ks) {
-             if (!BubbleActs.isFolder(k)) continue;
-             if (k.fid == null || k.fid.isEmpty()) { k.fid = BubbleActs.newFid(); c2 = true; }
-             labels.add(t("حرکات حباب", "Bubble moves") + " " + swDirName(d) + " › " + BubbleActs.title(this, k));
-             fids.add(k.fid);
+            if (collectFolders(ks, t("حرکات حباب", "Bubble moves") + " " + swDirName(d) + " › ", labels, fids)) {
+             BubbleActs.setKids(root, ks);
+             BubbleActs.swipeRootSave(sp, d, root);
             }
-            if (c2) { BubbleActs.setKids(root, ks); BubbleActs.swipeRootSave(sp, d, root); }
            }
            if (labels.isEmpty()) {
             Toast.makeText(this, t("هنوز پوشه‌ای ساخته نشده", "No folders yet"), Toast.LENGTH_SHORT).show();
@@ -7898,6 +7927,20 @@ jobs:
              pinDialog();
             }).setNegativeButton(t("لغو", "Cancel"), null).show();
            }).setNegativeButton(t("بستن", "Close"), null).show();
+          }
+
+          boolean collectFolders(List<BubbleActs.Act> level, String prefix, List<String> labels, List<String> fids) {
+           boolean changed = false;
+           for (BubbleActs.Act k : level) {
+            if (!BubbleActs.isFolder(k)) continue;
+            if (k.fid == null || k.fid.isEmpty()) { k.fid = BubbleActs.newFid(); changed = true; }
+            String name = prefix + BubbleActs.title(this, k);
+            labels.add(name);
+            fids.add(k.fid);
+            List<BubbleActs.Act> sub = BubbleActs.kids(k);
+            if (collectFolders(sub, name + " › ", labels, fids)) { BubbleActs.setKids(k, sub); changed = true; }
+           }
+           return changed;
           }
 
           View sectionTitle(String text, int fg) {
