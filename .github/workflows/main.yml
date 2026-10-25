@@ -153,18 +153,11 @@ jobs:
           cat > app/src/main/res/drawable/ic_bg.xml <<'EOF'
           <?xml version="1.0" encoding="utf-8"?>
           <vector xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:aapt="http://schemas.android.com/aapt"
               android:width="108dp" android:height="108dp"
               android:viewportWidth="108" android:viewportHeight="108">
-              <path android:pathData="M0,0h108v108h-108z">
-                  <aapt:attr name="android:fillColor">
-                      <gradient android:startX="0" android:startY="0" android:endX="108" android:endY="108" android:type="linear">
-                          <item android:offset="0" android:color="#FFFFFFFF"/>
-                          <item android:offset="1" android:color="#FFD5D9E6"/>
-                      </gradient>
-                  </aapt:attr>
-              </path>
+              <path android:fillColor="#00000000" android:pathData="M0,0h108v108h-108z"/>
           </vector>
+
           EOF
 
           cat > app/src/main/res/drawable/ic_fg.xml <<'EOF'
@@ -173,34 +166,37 @@ jobs:
               xmlns:aapt="http://schemas.android.com/aapt"
               android:width="108dp" android:height="108dp"
               android:viewportWidth="108" android:viewportHeight="108">
-              <path android:pathData="M32.2,56.2 a23,23 0 1,0 46,0 a23,23 0 1,0 -46,0" android:strokeColor="#FF000000" android:strokeAlpha="0.2" android:strokeWidth="16"/>
-              <path android:fillColor="#FFFBBC00" android:pathData="M45.98,24.06 A31,31 0 0 1 62.23,24.11 L57.98,39.54 A15,15 0 0 0 50.12,39.51 Z"/>
-              <path android:fillColor="#FFFC9A00" android:pathData="M62.02,24.06 A31,31 0 0 1 76.07,32.23 L64.68,43.47 A15,15 0 0 0 57.88,39.51 Z"/>
-              <path android:fillColor="#FFFF5608" android:pathData="M75.92,32.08 A31,31 0 0 1 84,46.19 L68.52,50.22 A15,15 0 0 0 64.61,43.39 Z"/>
-              <path android:fillColor="#FFFF2813" android:pathData="M83.94,45.98 A31,31 0 0 1 83.89,62.23 L68.46,57.98 A15,15 0 0 0 68.49,50.12 Z"/>
-              <path android:fillColor="#FFA41A4A" android:pathData="M83.94,62.02 A31,31 0 0 1 75.77,76.07 L64.53,64.68 A15,15 0 0 0 68.49,57.88 Z"/>
-              <path android:fillColor="#FF8600B2" android:pathData="M75.92,75.92 A31,31 0 0 1 61.81,84 L57.78,68.52 A15,15 0 0 0 64.61,64.61 Z"/>
-              <path android:fillColor="#FF3D00A5" android:pathData="M62.02,83.94 A31,31 0 0 1 45.77,83.89 L50.02,68.46 A15,15 0 0 0 57.88,68.49 Z"/>
-              <path android:fillColor="#FF0044FF" android:pathData="M45.98,83.94 A31,31 0 0 1 31.93,75.77 L43.32,64.53 A15,15 0 0 0 50.12,68.49 Z"/>
-              <path android:fillColor="#FF0090CC" android:pathData="M32.08,75.92 A31,31 0 0 1 24,61.81 L39.48,57.78 A15,15 0 0 0 43.39,64.61 Z"/>
-              <path android:fillColor="#FF69B030" android:pathData="M24.06,62.02 A31,31 0 0 1 24.11,45.77 L39.54,50.02 A15,15 0 0 0 39.51,57.88 Z"/>
-              <path android:fillColor="#FFD3EA2B" android:pathData="M24.06,45.98 A31,31 0 0 1 32.23,31.93 L43.47,43.32 A15,15 0 0 0 39.51,50.12 Z"/>
-              <path android:fillColor="#FFFFFF33" android:pathData="M32.08,32.08 A31,31 0 0 1 46.19,24 L50.22,39.48 A15,15 0 0 0 43.39,43.39 Z"/>
-              <path android:pathData="M25.3,54 a28.7,28.7 0 1,0 57.4,0 a28.7,28.7 0 1,0 -57.4,0" android:strokeColor="#FF000000" android:strokeAlpha="0.27" android:strokeWidth="4.6"/>
-              <path android:pathData="M37,54 a17,17 0 1,0 34,0 a17,17 0 1,0 -34,0" android:strokeColor="#FF000000" android:strokeAlpha="0.22" android:strokeWidth="4"/>
-              <path android:pathData="M31,54 a23,23 0 1,0 46,0 a23,23 0 1,0 -46,0" android:strokeColor="#FFFFFFFF" android:strokeAlpha="0.25" android:strokeWidth="3.52"/>
-              <path android:pathData="M31,54 a23,23 0 1,0 46,0 a23,23 0 1,0 -46,0" android:strokeWidth="16">
-                  <aapt:attr name="android:strokeColor">
-                      <gradient android:startX="23" android:startY="23" android:endX="85" android:endY="85" android:type="linear">
-                          <item android:offset="0" android:color="#66FFFFFF"/>
-                          <item android:offset="0.4" android:color="#00FFFFFF"/>
-                          <item android:offset="0.6" android:color="#00000000"/>
-                          <item android:offset="1" android:color="#66000000"/>
+              <path android:fillType="evenOdd"
+                  android:pathData="M21,54 a33,33 0 1,0 66,0 a33,33 0 1,0 -66,0 M38,54 a16,16 0 1,0 32,0 a16,16 0 1,0 -32,0">
+                  <aapt:attr name="android:fillColor">
+                      <gradient android:type="sweep" android:centerX="54" android:centerY="54">
+                          <item android:color="#FFFBBC00" android:offset="0"/>
+                          <item android:color="#FFFF2813" android:offset="0.17"/>
+                          <item android:color="#FFA41A4A" android:offset="0.33"/>
+                          <item android:color="#FF0044FF" android:offset="0.5"/>
+                          <item android:color="#FF0090CC" android:offset="0.67"/>
+                          <item android:color="#FF69B030" android:offset="0.83"/>
+                          <item android:color="#FFFBBC00" android:offset="1"/>
                       </gradient>
                   </aapt:attr>
               </path>
-              <path android:pathData="M23.4,54 a30.6,30.6 0 1,0 61.2,0 a30.6,30.6 0 1,0 -61.2,0" android:strokeColor="#FFFFFFFF" android:strokeAlpha="0.33" android:strokeWidth="0.8"/>
+              <path android:fillType="evenOdd"
+                  android:pathData="M21,54 a33,33 0 1,0 66,0 a33,33 0 1,0 -66,0 M38,54 a16,16 0 1,0 32,0 a16,16 0 1,0 -32,0">
+                  <aapt:attr name="android:fillColor">
+                      <gradient android:type="linear" android:startX="30" android:startY="20" android:endX="78" android:endY="88">
+                          <item android:color="#66FFFFFF" android:offset="0"/>
+                          <item android:color="#00FFFFFF" android:offset="0.45"/>
+                          <item android:color="#00000000" android:offset="0.55"/>
+                          <item android:color="#77000000" android:offset="1"/>
+                      </gradient>
+                  </aapt:attr>
+              </path>
+              <path android:strokeColor="#88FFFFFF" android:strokeWidth="1.2"
+                  android:pathData="M21,54 a33,33 0 1,0 66,0 a33,33 0 1,0 -66,0"/>
+              <path android:strokeColor="#88000000" android:strokeWidth="1.2"
+                  android:pathData="M38,54 a16,16 0 1,0 32,0 a16,16 0 1,0 -32,0"/>
           </vector>
+
           EOF
 
           cat > app/src/main/res/drawable/ic_mono.xml <<'EOF'
@@ -976,6 +972,7 @@ jobs:
 
            static class Act {
             String pkg, type, id, label, name = "";   // name = the custom name shown in the bubble list; type: "sc" shortcut, "cmp" screen, "rcv" receiver, "svc" service, "tile" quick settings tile, "macro" recorded taps inside the app (steps in id), "app" open the app (id: "popup" or "full")
+            String fid = "";                 // stable id of a folder (used by pins)
             long ts;                       // last time this action was saved / chosen
            }
 
@@ -992,6 +989,7 @@ jobs:
               x.id = o.optString("id", "");
               x.label = o.optString("label", "");
               x.name = o.optString("name", "");
+              x.fid = o.optString("fid", "");
               x.ts = o.optLong("ts", 0);
               a[i] = x;
              }
@@ -1011,6 +1009,7 @@ jobs:
                o.put("id", x.id == null ? "" : x.id);
                o.put("label", x.label == null ? "" : x.label);
                o.put("name", x.name == null ? "" : x.name);
+               o.put("fid", x.fid == null ? "" : x.fid);
                o.put("ts", x.ts);
               }
               arr.put(o);
@@ -1353,6 +1352,24 @@ jobs:
            }
 
            
+           static String newFid() { return "f" + System.currentTimeMillis() + "x" + (int) (Math.random() * 100000); }
+
+           // pins: folder id -> column (2 to 5); a folder without a pin has no entry
+           static JSONObject pins(SharedPreferences sp) {
+            try { return new JSONObject(sp.getString("pins", "{}")); } catch (Exception e) { return new JSONObject(); }
+           }
+
+           static int pinCol(SharedPreferences sp, Act f) {
+            if (f == null || f.fid == null || f.fid.isEmpty()) return 0;
+            return pins(sp).optInt(f.fid, 0);
+           }
+
+           static void setPin(SharedPreferences sp, String fid, int col) {
+            JSONObject o = pins(sp);
+            try { if (col <= 0) o.remove(fid); else o.put(fid, col); } catch (Exception e) { }
+            sp.edit().putString("pins", o.toString()).apply();
+           }
+
            static boolean isFolder(Act x) { return x != null && "folder".equals(x.type); }
 
            static Act fromJson(JSONObject o) {
@@ -1363,6 +1380,7 @@ jobs:
             x.id = o.optString("id", o.has("win") ? o.optString("win", "full") : "");
             x.label = o.optString("label", "");
             x.name = o.optString("name", "");
+              x.fid = o.optString("fid", "");
             x.ts = o.optLong("ts", 0);
             return x;
            }
@@ -1374,6 +1392,7 @@ jobs:
             o.put("id", x.id == null ? "" : x.id);
             o.put("label", x.label == null ? "" : x.label);
             o.put("name", x.name == null ? "" : x.name);
+               o.put("fid", x.fid == null ? "" : x.fid);
             o.put("ts", x.ts);
             return o;
            }
@@ -1711,7 +1730,9 @@ jobs:
              List<BubbleActs.Act> kids = BubbleActs.kids(BubbleActs.swipeRoot(sp, d));
              if (!kids.isEmpty()) {
               dropSquash();
+              swipeBase = true;
               showKids(kids, null);
+              afterBaseOpen(d);
              }
              return;
             }
@@ -1746,7 +1767,12 @@ jobs:
             final int next = owner + 1;
             if (next <= top) {
              String nk = next < top ? sideBoxes.get(next).key : curKey;
-             if (fk.equals(nk)) { while (sideBoxes.size() >= next) closeTopSideAnim(); }
+             if (fk.equals(nk)) { while (sideBoxes.size() >= next) closeTopSideAnim(); return; }
+             // another folder of the same column: the open one goes and the new one comes, quickly
+             swapFast = true;
+             while (sideBoxes.size() >= next) closeTopSideAnim();
+             openSideBox(kidItems(BubbleActs.kids(k), null, next), fk);
+             swapFast = false;
              return;
             }
             openSideBox(kidItems(BubbleActs.kids(k), null, next), fk);
@@ -1763,6 +1789,7 @@ jobs:
              l.add(back);
             }
             for (final BubbleActs.Act k : kids) {
+             if (reopenParent == null && owner == 0 && BubbleActs.pinCol(sp, k) > 0) continue;
              LItem it = new LItem();
              if (BubbleActs.isFolder(k)) {
               it.icon = folderIcon();
@@ -1822,6 +1849,8 @@ jobs:
             private String curKey = null;
             private int curCX, curCY, lastRowLeft, lastRowRight, lastRowBottom;
             private boolean noOpenFx = false;
+            private boolean swapFast = false;
+            private boolean swipeBase = false;
             private int listTextColor = 0xFFFFFFFF;
             private int lastTouchRawY = 0;
 
@@ -1858,6 +1887,35 @@ jobs:
             }
 
             // puts a new box next to the current one, at the same height
+            private void afterBaseOpen(final String scope) {
+             final FrameLayout base = listRoot;
+             if (base == null) return;
+             base.post(() -> openPins(scope));
+            }
+
+            // opens each pinned folder of the given list in its column, in column order
+            private void openPins(String scope) {
+             List<BubbleActs.Act> tops = new ArrayList<>();
+             if ("bub_acts".equals(scope)) {
+              for (BubbleActs.Act a : BubbleActs.load(sp)) if (BubbleActs.isFolder(a)) tops.add(a);
+             } else {
+              for (BubbleActs.Act k : BubbleActs.kids(BubbleActs.swipeRoot(sp, scope))) if (BubbleActs.isFolder(k)) tops.add(k);
+             }
+             List<BubbleActs.Act> pinned = new ArrayList<>();
+             for (BubbleActs.Act f : tops) if (BubbleActs.pinCol(sp, f) > 0) pinned.add(f);
+             java.util.Collections.sort(pinned, (x, y) -> Integer.compare(BubbleActs.pinCol(sp, x), BubbleActs.pinCol(sp, y)));
+             for (BubbleActs.Act f : pinned) {
+              if (listRoot == null || listParams == null) return;
+              int[] tl = new int[2];
+              listRoot.getLocationOnScreen(tl);
+              lastTouchRawY = tl[1];
+              lastRowLeft = tl[0];
+              lastRowRight = tl[0] + listRoot.getWidth();
+              lastRowBottom = tl[1] + listRoot.getHeight();
+              openSideBox(kidItems(BubbleActs.kids(f), null, sideBoxes.size() + 1), fkey(f));
+             }
+            }
+
             private void openSideBox(List<LItem> l, String key) {
            int gap = dpToPx(3);
            boolean right = sp.getInt("mock_px", 70) > 50;
@@ -1867,7 +1925,9 @@ jobs:
            forcedX = right ? listParams.x - w - gap : listParams.x + w + gap;
            // the new column starts at the height of the touched folder
            int y = lastTouchRawY;
-           forcedY = Math.max(dpToPx(8), Math.min(sh - listParams.height - dpToPx(8), y));
+           int[] pl = new int[2];
+           listRoot.getLocationOnScreen(pl);
+           forcedY = lastTouchRawY - (pl[1] - listParams.y);
            Box pb = new Box(listRoot, listCard, listParams, curKey);
            pb.cx = curCX; pb.cy = curCY;
            sideBoxes.add(pb);
@@ -1925,13 +1985,15 @@ jobs:
            private List<LItem> customItems = null;
 
            private void openList(final boolean withLauncher) {
+             swipeBase = false;
              if (sp.getBoolean("bub_auto", false) && TileClickService.ready()) {
-              TileClickService.sampleLuma(this, lum -> { if (lum < 0) Toast.makeText(this, tr("رنگ زیر کادرها خوانده نشد", "Could not read the colour under the boxes"), Toast.LENGTH_SHORT).show(); autoLight = lum > 128; customItems = null; openListCore(withLauncher); });
+              TileClickService.sampleLuma(this, lum -> { if (lum < 0) Toast.makeText(this, tr("رنگ زیر کادرها خوانده نشد", "Could not read the colour under the boxes"), Toast.LENGTH_SHORT).show(); autoLight = lum > 128; customItems = null; openListCore(withLauncher); afterBaseOpen("bub_acts"); });
               return;
              }
              if (sp.getBoolean("bub_auto", false)) Toast.makeText(this, tr("برای اتومات، سرویس دسترسی‌پذیری VadLan را روشن کنید", "For auto colours, turn on the VadLan accessibility service"), Toast.LENGTH_LONG).show();
              customItems = null;
              openListCore(withLauncher);
+             afterBaseOpen("bub_acts");
             }
 
            private void openCustomList(List<LItem> items) {
@@ -1988,7 +2050,8 @@ jobs:
              } catch (Throwable e) { }
             }
             fillList();
-            if ((slideOpen || sp.getInt("bub_fx", 6) != 0) && !(noOpenFx && sp.getInt("bub_fx", 6) == 0)) listRoot.setAlpha(0f);   // the opening effect shows it
+            final int eff = noOpenFx ? sp.getInt("bub_fxf", 0) : (swipeBase ? sp.getInt("bub_fxs", 6) : (slideOpen ? 2 : sp.getInt("bub_fx", 6)));
+            if (eff != 0) listRoot.setAlpha(0f);   // the opening effect shows it
             layoutList(true);
             playOpen();
            }
@@ -1996,8 +2059,9 @@ jobs:
            // opening effect of the action list (0 none, 1 fade, 2 slide from the side, 3 grow from the bubble, 5 slide from the top, 6 stretchy drop)
            private void playOpen() {
             final FrameLayout r = listRoot;
-            final int fx = noOpenFx ? 0 : (slideOpen ? 2 : sp.getInt("bub_fx", 6));
+            final int fx = noOpenFx ? 0 : (swipeBase ? sp.getInt("bub_fxs", 6) : (slideOpen ? 2 : sp.getInt("bub_fx", 6)));
             if (r == null || fx == 0) return;
+            if (fx == 2 || fx == 4 || fx == 7) { final int[] bp = bubblePivot(); fxAnim(r, listParams, true, bp[0], bp[1], Integer.MIN_VALUE, fx, null); return; }
             final long ms = Math.max(100, Math.min(1500, sp.getInt("bub_fxms", 300)));
             final boolean right = sp.getInt("mock_px", 70) > 50;
             r.post(() -> {
@@ -2063,7 +2127,7 @@ jobs:
 
             // the chosen box effect (the same for opening and closing); (px,py) = the screen point the box grows from / shrinks to
             private void fxAnim(final FrameLayout r, final WindowManager.LayoutParams p, final boolean open, final int px, final int py, final int folderTop, final int fx, final Runnable end) {
-             final long ms = Math.max(100, Math.min(1500, sp.getInt("bub_fxms", 300)));
+             final long ms = swapFast ? 130 : Math.max(100, Math.min(1500, sp.getInt("bub_fxms", 300)));
              final int w = Math.max(1, p.width), h = Math.max(1, p.height);
              final int ex = p.x, ey = p.y;
              final boolean folder = folderTop != Integer.MIN_VALUE;
@@ -2105,7 +2169,7 @@ jobs:
 
             private void closeList() {
              final int[] bpv = bubblePivot();
-             final int mainFx = sp.getInt("bub_fx", 6);
+             final int mainFx = swipeBase ? sp.getInt("bub_fxs", 6) : sp.getInt("bub_fx", 6);
              // the first box is the action list itself; the newest box may be a folder column, so it is not always the main one
              final FrameLayout mainRoot = !sideBoxes.isEmpty() ? sideBoxes.get(0).root : listRoot;
              final WindowManager.LayoutParams mainP = !sideBoxes.isEmpty() ? sideBoxes.get(0).p : listParams;
@@ -2165,7 +2229,7 @@ jobs:
             listParams.x = right ? sw - w - dpToPx(8) : dpToPx(8);
             listParams.y = Math.max(edge, y);
             if (forcedX != null) listParams.x = Math.max(dpToPx(4), Math.min(sw - w - dpToPx(4), forcedX));
-            if (forcedY != null) listParams.y = Math.max(dpToPx(8), Math.min(sh - listParams.height - dpToPx(8), forcedY));
+            if (forcedY != null) listParams.y = forcedY;
             try {
              if (add) wm.addView(listRoot, listParams);
              else wm.updateViewLayout(listRoot, listParams);
@@ -2279,6 +2343,7 @@ jobs:
              final BubbleActs.Act a = all[i];
              if (a == null) continue;
              if (BubbleActs.isFolder(a)) {
+              if (BubbleActs.pinCol(sp, a) > 0) continue;
               addListItem(null, 0, null, folderIcon(), BubbleActs.title(this, a),
                () -> folderTap(a, 0, () -> openList(listWithLauncher)));
               continue;
@@ -4338,8 +4403,15 @@ jobs:
            }
           }
 
+           int currentScrollY() {
+            if (container == null || container.getChildCount() == 0) return 0;
+            View c = container.getChildAt(container.getChildCount() - 1);
+            return c instanceof ScrollView ? ((ScrollView) c).getScrollY() : 0;
+           }
+
            void show() {
             saveKeep();
+            final int prevScrollY = currentScrollY();
             boolean mp = menuPage();
             int fg = 0xFFFFFFFF;
             if (mp && mbgBmp == null && isLight(solid(mbg()))) fg = 0xFF111111;
@@ -4417,6 +4489,10 @@ jobs:
             int from = shownPage;
             shownPage = page;
             swap(v, transDir(from, page));
+            if (from == page && v instanceof ScrollView && prevScrollY > 0) {
+             final ScrollView keepSv = (ScrollView) v;
+             keepSv.post(() -> keepSv.scrollTo(0, prevScrollY));
+            }
             if (page == HOME) container.postDelayed(() -> saveRunRect(), 600);
            }
 
@@ -7781,27 +7857,85 @@ jobs:
             return tv;
            }
 
+           void pinDialog() {
+           final List<String> labels = new ArrayList<>();
+           final List<String> fids = new ArrayList<>();
+           BubbleActs.Act[] acts = BubbleActs.load(sp);
+           boolean changed = false;
+           for (BubbleActs.Act a : acts) {
+            if (a == null || !BubbleActs.isFolder(a)) continue;
+            if (a.fid == null || a.fid.isEmpty()) { a.fid = BubbleActs.newFid(); changed = true; }
+            labels.add(t("عملکردها", "Actions") + " › " + BubbleActs.title(this, a));
+            fids.add(a.fid);
+           }
+           if (changed) BubbleActs.save(sp, acts);
+           for (String d : new String[]{"left", "down", "right"}) {
+            BubbleActs.Act root = BubbleActs.swipeRoot(sp, d);
+            List<BubbleActs.Act> ks = BubbleActs.kids(root);
+            boolean c2 = false;
+            for (BubbleActs.Act k : ks) {
+             if (!BubbleActs.isFolder(k)) continue;
+             if (k.fid == null || k.fid.isEmpty()) { k.fid = BubbleActs.newFid(); c2 = true; }
+             labels.add(t("حرکات حباب", "Bubble moves") + " " + swDirName(d) + " › " + BubbleActs.title(this, k));
+             fids.add(k.fid);
+            }
+            if (c2) { BubbleActs.setKids(root, ks); BubbleActs.swipeRootSave(sp, d, root); }
+           }
+           if (labels.isEmpty()) {
+            Toast.makeText(this, t("هنوز پوشه‌ای ساخته نشده", "No folders yet"), Toast.LENGTH_SHORT).show();
+            return;
+           }
+           CharSequence[] items = new CharSequence[labels.size()];
+           for (int i = 0; i < items.length; i++) {
+            int c = BubbleActs.pins(sp).optInt(fids.get(i), 0);
+            items[i] = labels.get(i) + (c > 0 ? "   📌 " + t("ستون ", "column ") + c : "");
+           }
+           new AlertDialog.Builder(this).setTitle(t("پین پوشه‌ها", "Pin folders")).setItems(items, (d, w) -> {
+            final String fid = fids.get(w);
+            CharSequence[] cols = {t("بدون پین", "No pin"), t("ستون ۲", "Column 2"), t("ستون ۳", "Column 3"), t("ستون ۴", "Column 4"), t("ستون ۵", "Column 5")};
+            new AlertDialog.Builder(this).setTitle(labels.get(w)).setItems(cols, (d2, c2w) -> {
+             BubbleActs.setPin(sp, fid, c2w == 0 ? 0 : c2w + 1);
+             pinDialog();
+            }).setNegativeButton(t("لغو", "Cancel"), null).show();
+           }).setNegativeButton(t("بستن", "Close"), null).show();
+          }
+
+          View sectionTitle(String text, int fg) {
+            TextView tv = new TextView(this);
+            tv.setText(text);
+            tv.setTextColor(fg);
+            tv.setTextSize(13);
+            tv.setTypeface(null, Typeface.BOLD);
+            tv.setAlpha(0.7f);
+            tv.setPadding(dp(6), dp(18), dp(6), dp(4));
+            return tv;
+           }
+
            View settingsPage(final int fg) {
             LinearLayout r = vbox();
             r.addView(topBar(t("تنظیمات", "Settings"), fg));
-            r.addView(row(0xFF00ACC1, "☰", t("نوار ابزار", "Toolbar"), null, 0, fg,
-              v -> { page = TBAR; show(); }));
-            r.addView(row(0xFF5E35B1, "🏠", t("صفحه خانگی", "Home Page"), null, 0, fg,
-              v -> { page = HPAGE; show(); }));
+            r.addView(sectionTitle(t("ظاهر", "Appearance"), fg));
             r.addView(row(0xFF5C6BC0, "🎨", t("پس‌زمینه", "Background"), null, 0, fg,
               v -> { page = BG; show(); }));
-            r.addView(row(0xFFFF9800, "🚀", t("رفتار", "Behavior"), null, 0, fg,
-              v -> { page = BEHAVIOR; show(); }));
-            r.addView(row(0xFF29B6F6, "⚓", t("داک", "Dock"), null, 0, fg,
-              v -> { page = DOCK; show(); }));
-            r.addView(row(0xFFFF5722, "🔮", t("حباب", "Bubble"), null, 0, fg,
-              v -> { page = MOCK; show(); }));
-            r.addView(row(0xFF8D6E63, "📁", t("تنظیمات پوشه", "Folder Settings"), null, 0, fg,
-              v -> { page = FOLDER; show(); }));
             r.addView(row(0xFF3F51B5, "Aa", t("فونت", "Font"), null, 0, fg,
               v -> { page = FONT; show(); }));
             r.addView(row(0xFFEC407A, "🌐", t("زبان", "Language"), fa ? "فارسی" : "English", 0, fg,
               v -> { page = LANG; show(); }));
+            r.addView(sectionTitle(t("صفحه اصلی", "Home screen"), fg));
+            r.addView(row(0xFF00ACC1, "☰", t("نوار ابزار", "Toolbar"), null, 0, fg,
+              v -> { page = TBAR; show(); }));
+            r.addView(row(0xFF5E35B1, "🏠", t("صفحه خانگی", "Home Page"), null, 0, fg,
+              v -> { page = HPAGE; show(); }));
+            r.addView(row(0xFF29B6F6, "⚓", t("داک", "Dock"), null, 0, fg,
+              v -> { page = DOCK; show(); }));
+            r.addView(row(0xFF8D6E63, "📁", t("تنظیمات پوشه", "Folder Settings"), null, 0, fg,
+              v -> { page = FOLDER; show(); }));
+            r.addView(sectionTitle(t("حباب", "Bubble"), fg));
+            r.addView(row(0xFFFF5722, "🔮", t("حباب", "Bubble"), null, 0, fg,
+              v -> { page = MOCK; show(); }));
+            r.addView(sectionTitle(t("رفتار و پشتیبان", "Behavior and backup"), fg));
+            r.addView(row(0xFFFF9800, "🚀", t("رفتار", "Behavior"), null, 0, fg,
+              v -> { page = BEHAVIOR; show(); }));
             r.addView(row(0xFF43A047, "💾", t("پشتیبان", "Backup"),
               t("گرفتن و فراخوانی نسخه پشتیبان تنظیمات", "Create and restore settings backups"), 0, fg,
               v -> { page = BACKUP; show(); }));
@@ -7814,6 +7948,8 @@ jobs:
             LinearLayout r = vbox();
             r.addView(topBar(t("صفحه خانگی", "Home Page"), fg));
             final boolean on = sp.getBoolean("hfOn", false);
+
+            r.addView(sectionTitle(t("کادر", "Frame"), fg));
             r.addView(row(0xFF7E57C2, "▣", t("کادر صفحه خانگی", "Home page frame"),
               t("کادری مثل پوشه فراگیر پشت آیکون‌های صفحه", "A frame like the immersive folder behind the icons"),
               on ? 3 : 2, fg, v -> {
@@ -7823,17 +7959,20 @@ jobs:
             r.addView(row(0xFFFF7043, "🖼", t("پس‌زمینه کادر", "Frame background"),
               t("رنگ، شفافیت و عکس کادر", "Color, transparency and picture of the frame"), 0, fg,
               v -> { page = HFBG; show(); }));
+            r.addView(toggleRow(0xFF7E57C2, "▣", t("افکت کادر", "Frame effect"),
+              t("افکت صفحه روی کل کادر صفحه اصلی اجرا می‌شود و آیکون‌ها با کادر جابجا می‌شوند (نیاز به صفحات افقی و کادر روشن)",
+                "The page effect runs on the whole home frame and the icons move with it (needs paged mode and frame on)"),
+              "hfFx", false, fg));
+
+            r.addView(sectionTitle(t("صفحات و افکت", "Pages and effects"), fg));
             // one page that scrolls down (on) or several pages that turn left and right (off)
             r.addView(toggleRowThen(0xFF26A69A, "↔", t("صفحات افقی", "Horizontal pages"),
               t("روشن: یک صفحه که به پایین اسکرول می‌شود. خاموش: چند صفحه که با کشیدن به چپ و راست می‌چرخند",
                 "On: one page that scrolls down. Off: several pages that turn left and right"),
               "hpScroll", true, fg, () -> { onPagesToggled(); show(); }));
-            // icon settings open right here, in lighter glass boxes
-            r.addView(toggleRow(0xFF7E57C2, "▣", t("افکت کادر", "Frame effect"),
-              t("افکت صفحه روی کل کادر صفحه اصلی اجرا می‌شود و آیکون‌ها با کادر جابجا می‌شوند (نیاز به صفحات افقی و کادر روشن)",
-                "The page effect runs on the whole home frame and the icons move with it (needs paged mode and frame on)"),
-              "hfFx", false, fg));
             if (pagedMode()) r.addView(transAnimGroup(fg));
+
+            r.addView(sectionTitle(t("آیکون", "Icons"), fg));
             r.addView(accordionGroupFaded(0xFFAB47BC, "🧩", t("آیکون", "Icon"), fg, 0.6f, () -> iconItems(fg)));
             return wrapScroll(r);
            }
@@ -7969,20 +8108,15 @@ jobs:
              }
             };
 
-            // everything about what the bubble does and its list lives on its own page
-            r.addView(row(0xFF00897B, "💬", t("عملکرد", "Actions"),
-              t("لانچر، عملکردها و ظاهر لیست حباب", "Launcher, actions and the look of the bubble list"),
-              0, fg, v -> {
-             page = BUB;
-             show();
-            }));
+            r.addView(sectionTitle(t("ظاهر", "Look"), fg));
             r.addView(accordionRow(0xFF2196F3, "📐", t("سایز حباب", "Bubble Size"), "mock_size", 30, 100, 56, " dp", fg, updateMock));
             r.addView(accordionRow(0xFF4CAF50, "💧", t("شفافیت حباب", "Bubble Opacity"), "mock_alpha", 20, 100, 90, "%", fg, updateMock));
             r.addView(accordionRow(0xFFFFB300, "⏱", t("سرعت", "Speed"), "mock_speed", 50, 2000, 2000, " ms", fg, updateMock));
             r.addView(accordionRow(0xFF5C6BC0, "🙈", t("نهان", "Hide"), "mock_hide", 30, 70, 68, "%", fg, updateMock));
+
+            r.addView(sectionTitle(t("محل و نمایش", "Position and display"), fg));
             r.addView(accordionRow(0xFF00ACC1, "↔", t("محل حباب (افقی)", "Bubble position (horizontal)"), "mock_px", 0, 100, 70, "%", fg, updateMock));
             r.addView(accordionRow(0xFF7E57C2, "↕", t("محل حباب (عمودی)", "Bubble position (vertical)"), "mock_py", 0, 100, 40, "%", fg, updateMock));
-
             boolean over = sp.getBoolean("mock_over", true);
             r.addView(row(0xFF9C27B0, "🔝", t("نمایش روی تمام برنامه‌ها", "Overlay Over Apps"),
               t("خاموش: حباب فقط روی صفحه لانچر دیده می‌شود", "Off: bubble is visible only on the launcher"),
@@ -7992,6 +8126,13 @@ jobs:
              show();
             }));
 
+            r.addView(sectionTitle(t("عملکرد", "Actions"), fg));
+            r.addView(row(0xFF00897B, "💬", t("عملکرد", "Actions"),
+              t("لانچر، عملکردها و ظاهر لیست حباب", "Launcher, actions and the look of the bubble list"),
+              0, fg, v -> {
+             page = BUB;
+             show();
+            }));
             return wrapScroll(r);
            }
 
@@ -8004,7 +8145,7 @@ jobs:
 
            View folderFxGroup(final int fg) {
             final int cur = sp.getInt("bub_fxf", 0);
-            return accordionGroupFaded(0xFF26A69A, "🗂", t("افکت های کادر پوشه", "Folder box effects"), fg, 0.6f, () -> {
+            return accordionGroupFaded(0xFF26A69A, "🗂", t("افکت کادر پوشه‌ها", "Folder boxes effect"), fg, 0.6f, () -> {
              View[] its = new View[FXF_IDS.length];
              for (int i = 0; i < its.length; i++) {
               final int k = i;
@@ -8094,10 +8235,10 @@ jobs:
              final int fx = sp.getInt("bub_fx", 6);
              final String[] fxNames = {
                t("بدون افکت", "No effect"), t("قطره‌ای (کش‌دار)", "Drop (stretchy)"), t("محو شدن", "Fade"),
-               t("بزرگ شدن از حباب", "Grow from the bubble"),
-               t("کشویی از بالا", "Slide from the top")};
-             final int[] fxIds = {0, 6, 1, 3, 5};
-             final int[] fxDots = {0xFF9E9E9E, 0xFF29B6F6, 0xFF42A5F5, 0xFFFF7043, 0xFF66BB6A};
+               t("کشویی", "Slide from the side"), t("بزرگ شدن از حباب", "Grow from the bubble"),
+               t("کرکره‌ای", "Shutter"), t("کشویی از بالا", "Slide from the top"), t("کش افقی", "Horizontal stretch")};
+             final int[] fxIds = {0, 6, 1, 2, 3, 4, 5, 7};
+             final int[] fxDots = {0xFF9E9E9E, 0xFF29B6F6, 0xFF42A5F5, 0xFF26A69A, 0xFFFF7043, 0xFF8D6E63, 0xFF66BB6A, 0xFFAB47BC};
              r.addView(accordionGroupFaded(0xFF26A69A, "🎞", t("افکت کادر اصلی", "Main box effect"), fg, 0.6f, () -> {
               View[] its = new View[fxNames.length];
               for (int i = 0; i < fxNames.length; i++) {
@@ -8110,7 +8251,19 @@ jobs:
               return its;
              }));
              r.addView(folderFxGroup(fg));
+             r.addView(accordionGroupFaded(0xFF26A69A, "🫧", t("افکت حرکات حباب", "Bubble moves effect"), fg, 0.6f, () -> {
+              View[] its = new View[fxNames.length];
+              for (int i = 0; i < its.length; i++) {
+               final int k = i;
+               its[i] = row(fxDots[i], "✦", fxNames[i], null, sp.getInt("bub_fxs", 6) == fxIds[i] ? 1 : 0, fg, v -> {
+                sp.edit().putInt("bub_fxs", fxIds[k]).apply();
+                show();
+               });
+              }
+              return its;
+             }));
              r.addView(accordionRow(0xFFFFB300, "⏱", t("سرعت افکت ها", "Effect speed"), "bub_fxms", 100, 1500, 300, " ms", fg, null));
+             r.addView(row(0xFFAB47BC, "📌", t("پین پوشه‌ها", "Pin folders"), t("پوشه‌ها را در ستون دلخواه همیشه باز نگه دارید", "Keep folders open in a column of your choice"), 0, fg, v -> pinDialog()));
             }
             return wrapScroll(r);
            }
@@ -8280,14 +8433,21 @@ jobs:
              return;
             }
             CharSequence[] items = {
-              t("تغییر عملکرد", "Change action"),
+              t("باز شدن در پاپ آپ", "Open in popup"),
+              t("باز شدن کامل", "Open full"),
               t("تغییر نام", "Rename"),
               t("حذف", "Delete")};
             new AlertDialog.Builder(this).setTitle((slot + 1) + ". " + BubbleActs.title(this, a))
               .setItems(items, (d, w) -> {
-               if (w == 0) {
-                actPickApp(slot);
-               } else if (w == 1) {
+               if (w == 0 || w == 1) {
+                a.type = "app";
+                a.id = w == 0 ? "popup" : "full";
+                a.label = w == 0 ? t("باز شدن در پاپ آپ", "Open in popup") : t("باز شدن کامل", "Open full");
+                a.ts = System.currentTimeMillis();
+                acts[slot] = a;
+                BubbleActs.save(sp, acts);
+                show();
+               } else if (w == 2) {
                 actAskName(slot, a.pkg, BubbleActs.appLabel(this, a.pkg), BubbleActs.title(this, a), true);
                } else {
                 acts[slot] = null;
@@ -8937,21 +9097,24 @@ jobs:
 
            // step 1: which app
            void actPickApp(final int slot) {
-            PackageManager pm = getPackageManager();
-            Intent q = new Intent(Intent.ACTION_MAIN).addCategory(Intent.CATEGORY_LAUNCHER);
-            Set<String> seen = new HashSet<>();
-            final List<String[]> l = new ArrayList<>();
-            for (ResolveInfo ri : pm.queryIntentActivities(q, 0)) {
-             String p = ri.activityInfo.packageName;
-             if (p.equals(getPackageName()) || !seen.add(p)) continue;
-             l.add(new String[]{ri.loadLabel(pm).toString(), p});
-            }
-            Collections.sort(l, (x, y) -> x[0].compareToIgnoreCase(y[0]));
-            CharSequence[] names = new CharSequence[l.size()];
-            for (int i = 0; i < names.length; i++) names[i] = l.get(i)[0];
-            new AlertDialog.Builder(this).setTitle(t("انتخاب برنامه", "Choose app"))
-              .setItems(names, (d, w) -> actAskName(slot, l.get(w)[1], l.get(w)[0], l.get(w)[0], false))
-              .setNegativeButton(t("لغو", "Cancel"), null).show();
+            multiAppPicker(pkgs -> chooseWin(win -> {
+             BubbleActs.Act[] acts = BubbleActs.load(sp);
+             List<Integer> empties = new ArrayList<>();
+             for (int k = 0; k < acts.length; k++) { int i = (slot + k) % acts.length; if (acts[i] == null) empties.add(i); }
+             int e = 0;
+             for (String pkg : pkgs) {
+              if (e >= empties.size()) break;
+              BubbleActs.Act a = new BubbleActs.Act();
+              a.pkg = pkg;
+              a.type = "app";
+              a.id = win;
+              a.label = "popup".equals(win) ? t("باز شدن در پاپ آپ", "Open in popup") : t("باز شدن کامل", "Open full");
+              a.ts = System.currentTimeMillis();
+              acts[empties.get(e++)] = a;
+             }
+             BubbleActs.save(sp, acts);
+             show();
+            }));
            }
 
            // step 2: the name this action gets in the bubble list
@@ -9380,8 +9543,13 @@ jobs:
             r.addView(topBar(t("داک", "Dock"), fg));
 
             boolean on1 = sp.getBoolean("dockOn1", true);
+            r.addView(sectionTitle(t("نمایش", "Show"), fg));
             r.addView(row(0xFF8E24AA, "👁", t("نمایش", "Show"), null, on1 ? 3 : 2, fg,
               v -> { sp.edit().putBoolean("dockOn1", !on1).apply(); show(); }));
+            r.addView(row(0xFF5C6BC0, "🎨", t("پس‌زمینه داک", "Dock background"), null, 0, fg,
+              v -> { page = DOCKBG; show(); }));
+
+            r.addView(sectionTitle(t("آیکون", "Icons"), fg));
             // icon: name on/off, icon size, icon name size (glass boxes, a little fainter)
             r.addView(accordionGroupFaded(0xFF00CCD6, "📱", t("آیکون", "Icon"), fg, 0.6f, () -> new View[]{
               toggleRow(0xFF7E57C2, "🏷", t("اسم آیکون", "Icon name"),
@@ -9389,8 +9557,8 @@ jobs:
                 "hideDockNames", false, fg),
               accordionRow(0xFF00CCD6, "📱", t("سایز آیکون", "Icon size"), "dockI1", 24, 64, 52, " dp", fg, null),
               accordionRow(0xFFFFB300, "🔤", t("سایز اسم آیکون", "Icon name size"), "dockTs1", 6, 20, 10, " sp", fg, null)}));
-            r.addView(row(0xFF5C6BC0, "🎨", t("پس‌زمینه داک", "Dock background"), null, 0, fg,
-              v -> { page = DOCKBG; show(); }));
+
+            r.addView(sectionTitle(t("چیدمان", "Layout"), fg));
             r.addView(accordionRow(0xFF2196F3, "🔢", t("تعداد اپلیکیشن", "Apps count"), "dockCount1", 4, 10, 4, "", fg, null));
             r.addView(accordionRow(0xFF4CAF50, "📄", t("تعداد صفحه", "Pages count"), "dockPages1", 1, 5, 1, "", fg, null));
             // dock position: positive = up (mm), 0 = now, -1 = lowest (touching the navigation keys)
